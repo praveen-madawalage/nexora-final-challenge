@@ -1,6 +1,9 @@
 # Nexora: Enterprise Climate Risk Intelligence & Carbon Financial Decision Suite
 ## CodeFest Datathon Finals 2026 | Official Team Submission
 
+**Live Production Prototype:** [nexora-final-challenge.streamlit.app](https://nexora-final-challenge-eklrszup3jypkheffvchph.streamlit.app/)  
+**GitHub Repository:** [github.com/praveen-madawalage/nexora-final-challenge](https://github.com/praveen-madawalage/nexora-final-challenge)
+
 ---
 
 ### Executive Summary
@@ -238,7 +241,19 @@ Open your browser at `http://localhost:8501/` to access the full 5-module termin
 
 ---
 
-### Deployment on Streamlit Community Cloud
+### Live Production Deployment & Cloud Access
+
+The production application is deployed live on Streamlit Community Cloud and fully interactive for judges and enterprise evaluators:
+
+- **Live Public URL:** [https://nexora-final-challenge-eklrszup3jypkheffvchph.streamlit.app/](https://nexora-final-challenge-eklrszup3jypkheffvchph.streamlit.app/)
+- **Deployment Source Branch:** `main`
+- **Application Entry Point:** `app/streamlit_mvp.py`
+- **Build Specification:** Standardized container built from `requirements.txt`
+- **Active Features in Cloud:** All 5 interactive modules (Executive Overview, 30-Day Multi-Market Forecaster, Sovereign Screener, 2026-2030 Policy Simulator, and EU CBAM Duty Calculator).
+
+---
+
+### Deployment on Streamlit Community Cloud (Re-deployment Guide)
 
 The production application is ready for cloud deployment directly from the `main` branch:
 
