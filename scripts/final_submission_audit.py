@@ -51,7 +51,7 @@ expected_paths = [
     ("Protocol AGENTS.md", BASE_DIR / "AGENTS.md"),
     ("Streamlit MVP App", BASE_DIR / "app" / "streamlit_mvp.py"),
     ("Presentation Slide Deck", BASE_DIR / "presentation" / "TeamName_Presentation.pptx"),
-    ("Master Submission Notebook", BASE_DIR / "notebooks" / "TeamName_FinalNotebook.ipynb"),
+    ("Master Submission Notebook", BASE_DIR / "notebooks" / ("Nexora_FinalNotebook.ipynb" if (BASE_DIR / "notebooks" / "Nexora_FinalNotebook.ipynb").exists() else "TeamName_FinalNotebook.ipynb")),
     ("Processed Country Clean Data", BASE_DIR / "data" / "processed" / "country_clean.csv"),
     ("Processed Prices Clean Data", BASE_DIR / "data" / "processed" / "prices_clean.csv"),
     ("Processed Events Clean Data", BASE_DIR / "data" / "processed" / "events_clean.csv"),
@@ -193,7 +193,7 @@ notebooks_to_check = [
     ("Q1.2 Emissions Notebook", BASE_DIR / "notebooks" / "co2_energy_mix.ipynb"),
     ("04 Q2 Event Hypothesis", BASE_DIR / "notebooks" / "04_question2_event_hypothesis.ipynb"),
     ("05 Q3 Scenario Modeling", BASE_DIR / "notebooks" / "05_question3_scenario_modeling.ipynb"),
-    ("Master Submission Notebook", BASE_DIR / "notebooks" / "TeamName_FinalNotebook.ipynb"),
+    ("Master Submission Notebook", BASE_DIR / "notebooks" / ("Nexora_FinalNotebook.ipynb" if (BASE_DIR / "notebooks" / "Nexora_FinalNotebook.ipynb").exists() else "TeamName_FinalNotebook.ipynb")),
 ]
 
 for label, p in notebooks_to_check:
