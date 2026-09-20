@@ -1,0 +1,46 @@
+{
+    "module": "Q3_Energy_Transition_Scenarios",
+    "entity": "GLOBAL_50_COUNTRIES",
+    "as_of_date": "2026-12-31",
+    "horizon": "2026_to_2030",
+    "target": "co2_per_capita_t + co2_emissions_mt",
+    "dimensions": {
+        "num_countries": 50,
+        "num_scenarios": 3,
+        "years": [
+            2026,
+            2027,
+            2028,
+            2029,
+            2030
+        ],
+        "total_projection_rows": 750
+    },
+    "metrics": {
+        "surrogate_r2": 0.9376455603334097,
+        "surrogate_rmse": 1.7019229325984524,
+        "surrogate_mape": 19.928971483093687
+    },
+    "scenarios_evaluated": [
+        "BAU",
+        "Moderate",
+        "Accelerated"
+    ],
+    "key_findings": {
+        "cumulative_mitigation_dividend_gt": 11.03,
+        "highest_cbam_risk_country": "Qatar",
+        "highest_cbam_risk_score": 87.2
+    },
+    "features_used": [
+        "coal_pct",
+        "oil_pct",
+        "gas_pct",
+        "renewables_total_pct",
+        "nuclear_pct",
+        "hydro_pct",
+        "clean_baseload_pct",
+        "fossil_ratio",
+        "country_hist_mean"
+    ],
+    "model_name": "Monotone LightGBM Gradient Boosted Regressor (IPCC Delta-Calibrated)"
+}
