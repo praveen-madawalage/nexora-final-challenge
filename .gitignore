@@ -11,5 +11,5 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 venv/
-env/
 kickoff_prompts.md
+presentation/
