@@ -131,6 +131,13 @@ Before initiating predictive modeling, we conduct a structured multi-domain expl
 4. **The 45% Renewable Tipping Threshold:** Empirical distribution analysis reveals a non-linear tipping point at **45% renewable penetration**, beyond which national per-capita emissions experience a sharp descent below **4.0 t CO2/capita**.
 5. **Accelerating Temperature Anomalies:** Monthly temperature anomalies demonstrate widening positive standard deviations post-2015, strongly correlated with the frequency of extreme climate disasters (r = 0.68)."""),
 
+    md("""### Visual Analysis: Figures 1 & 2 - Compliance Carbon Regimes and Global Power Transition
+#### Analytical Guide & Key Empirical Findings:
+- **Figure 1 (Carbon Market Historical Traces):** Demonstrates profound structural divergence across compliance carbon regimes. EU ETS and UK ETS exhibit high market volatility driven by regulatory allowance supply tightening and power sector gas-switching economics. In contrast, North American markets (California CaT and RGGI) trade within narrower bands governed by statutory auction price floors and reserves. China ETS reflects regulated price stabilization tied to carbon intensity benchmarks rather than absolute caps.
+  - *Modeling Implication:* Models must be market-stratified rather than pooled naively without market-specific features.
+- **Figure 2 (Global Generation Mix Evolution 2000-2026):** Proves a fundamental secular transition: global coal generation share declined from 18.3% to 11.4%, with solar and wind scaling rapidly from <1.0% to 11.2%. Fossil gas expanded to absorb intermittent renewables, acting as a crucial transition buffer.
+  - *Modeling Implication:* Underscores the necessity of enforcing strict fuel conservation (sum of all fuel shares = 100%) during 2026-2030 scenario modeling."""),
+
     code("""\
 # [Figure 1 & 2] Carbon Markets Historical Traces & Global Generation Mix Shift
 fig, axes = plt.subplots(2, 1, figsize=(15, 12))
@@ -146,11 +153,10 @@ axes[1].axis('off')
 plt.tight_layout()
 plt.show()"""),
 
-    md("""#### Figure 1 & 2 Analytical Takeaways:
-- **Figure 1 (Carbon Market Historical Traces):** Demonstrates profound structural divergence across compliance carbon regimes. EU ETS and UK ETS exhibit high market volatility driven by regulatory allowance supply tightening and power sector gas-switching economics. In contrast, North American markets (California CaT and RGGI) trade within narrower bands governed by statutory auction price floors and reserves. China ETS reflects regulated price stabilization tied to carbon intensity benchmarks rather than absolute caps.
-  - *Modeling Implication:* Models must be market-stratified rather than pooled naively without market-specific features.
-- **Figure 2 (Global Generation Mix Evolution 2000-2026):** Proves a fundamental secular transition: global coal generation share declined from 18.3% to 11.4%, with solar and wind scaling rapidly from <1.0% to 11.2%. Fossil gas expanded to absorb intermittent renewables, acting as a crucial transition buffer.
-  - *Modeling Implication:* Underscores the necessity of enforcing strict fuel conservation (sum of all fuel shares = 100%) during 2026-2030 scenario modeling."""),
+    md("""### Visual Analysis: Figures 3 & 4 - The Decoupling Paradox and Climate Policy Shocks
+#### Analytical Guide & Key Empirical Findings:
+- **Figure 3 (The Decoupling Paradox Scatter):** Compares 26-year renewable growth against change in per-capita CO2 emissions. The data confirms the Decoupling Paradox: expanding renewable capacity alone does not guarantee emissions reduction if nations simultaneously expand or maintain baseload coal generation to satisfy industrial demand. True decarbonization only occurs when renewable additions are coupled with active fossil capacity retirement.
+- **Figure 4 (Climate Events Historical Timeline):** Maps 50 major global climate disasters and international policy summits (2003-2026) across jurisdictional regions. Extreme weather events and policy announcements cluster with accelerating frequency post-2015, establishing the empirical foundation for our Question 2 backward proximity shock join."""),
 
     code("""\
 # [Figure 3 & 4] Decoupling Paradox Scatter & Climate Events Timeline
@@ -167,9 +173,10 @@ axes[1].axis('off')
 plt.tight_layout()
 plt.show()"""),
 
-    md("""#### Figure 3 & 4 Analytical Takeaways:
-- **Figure 3 (The Decoupling Paradox Scatter):** Compares 26-year renewable growth against change in per-capita CO2 emissions. The data confirms the Decoupling Paradox: expanding renewable capacity alone does not guarantee emissions reduction if nations simultaneously expand or maintain baseload coal generation to satisfy industrial demand. True decarbonization only occurs when renewable additions are coupled with active fossil capacity retirement.
-- **Figure 4 (Climate Events Historical Timeline):** Maps 50 major global climate disasters and international policy summits (2003-2026) across jurisdictional regions. Extreme weather events and policy announcements cluster with accelerating frequency post-2015, establishing the empirical foundation for our Question 2 backward proximity shock join."""),
+    md("""### Visual Analysis: Figures 5 & 6 - Climate Warming Velocity and Cross-Domain Correlations
+#### Analytical Guide & Key Empirical Findings:
+- **Figure 5 (Temperature Anomaly Warming Spiral):** Illustrates monthly surface temperature anomalies relative to the 1951-1980 baseline. Regional warming exceeds +1.3 degrees C in post-2020 observations, highlighting accelerating global warming velocity.
+- **Figure 6 (Cross-Dataset Correlation Matrix):** Quantifies structural interdependencies across macroeconomic, energy, and climate variables. Coal generation share shows the strongest positive correlation with carbon intensity (r = +0.74), whereas renewable generation exhibits an inverse correlation (r = -0.58). Atmospheric CO2 ppm demonstrates strong collinearity with cumulative historical economic output."""),
 
     code("""\
 # [Figure 5 & 6] Temperature Anomaly Warming Spiral & Cross-Domain Correlation Matrix
@@ -185,10 +192,6 @@ axes[1].axis('off')
 
 plt.tight_layout()
 plt.show()"""),
-
-    md("""#### Figure 5 & 6 Analytical Takeaways:
-- **Figure 5 (Temperature Anomaly Warming Spiral):** Illustrates monthly surface temperature anomalies relative to the 1951-1980 baseline. Regional warming exceeds +1.3 degrees C in post-2020 observations, highlighting accelerating global warming velocity.
-- **Figure 6 (Cross-Dataset Correlation Matrix):** Quantifies structural interdependencies across macroeconomic, energy, and climate variables. Coal generation share shows the strongest positive correlation with carbon intensity (r = +0.74), whereas renewable generation exhibits an inverse correlation (r = -0.58). Atmospheric CO2 ppm demonstrates strong collinearity with cumulative historical economic output."""),
 
     # -------------------------------------------------------------------------
     # SECTION 2: CANONICAL DATA ENGINEERING & QA AUDIT
@@ -230,6 +233,11 @@ The objective of Question 1.1 is forecasting daily compliance carbon allowance p
 ### Understanding Price Metrics: Why MAPE and RMSE?
 In daily financial and commodity time series, out-of-sample prices behave as martingales (random walks with drift). Evaluating a 30-day forecast horizon using $R^2$ on price levels often yields near-zero or negative values because the total test variance is small relative to multi-step mean squared error. Consequently, international trading and datathon standards rely on **Mean Absolute Percentage Error (MAPE)** and **Root Mean Squared Error (RMSE)**."""),
 
+    md("""### Visual Analysis: Figure Q1.1 - Multi-Market 30-Day Carbon Price Forecast Curves
+#### Analytical Guide & Model Benchmark Findings:
+- **30-Day Multi-Market Price Forecast Curves:** Contrasts out-of-sample actual prices against Naive Persistence, Exponential Smoothing, ARIMA, and Autoregressive LightGBM across the final 30 trading days of each compliance system.
+- **Key Finding:** Autoregressive LightGBM effectively tracks the volatility envelope and directional drift of carbon prices, outperforming static linear models during market shifts. In contrast, ARIMA and Exponential Smoothing suffer from trend lag or mean reversion bias in regulatory compliance markets."""),
+
     code("""\
 # Display Question 1.1 Price Forecasting Results & Multi-Market Curves
 q1_df = pd.read_csv(OUT_DIR / 'q1_price_forecasts.csv')
@@ -261,10 +269,6 @@ if (FIG_DIR / 'fig_q1_1_price_forecasts.png').exists():
     ax.axis('off')
     plt.tight_layout()
     plt.show()"""),
-
-    md("""#### Figure Q1.1 Analytical Takeaways:
-- **30-Day Multi-Market Price Forecast Curves:** Contrasts out-of-sample actual prices against Naive Persistence, Exponential Smoothing, ARIMA, and Autoregressive LightGBM across the final 30 trading days of each compliance system.
-- **Key Finding:** Autoregressive LightGBM effectively tracks the volatility envelope and directional drift of carbon prices, outperforming static linear models during market shifts. In contrast, ARIMA and Exponential Smoothing suffer from trend lag or mean reversion bias in regulatory compliance markets."""),
 
     md("""---
 ### 3.2 Question 1.2: Sovereign CO2 from Energy Mix Regression
@@ -298,6 +302,11 @@ Our production model enforces physical monotonicity constraints:
 - $\\frac{\\partial \\text{CO2}}{\\partial \\text{Fossil Fuel}} > 0$: Increasing coal, oil, or gas shares strictly increases predicted emissions.
 - $\\frac{\\partial \\text{CO2}}{\\partial \\text{Renewable Fuel}} < 0$: Expanding solar, wind, hydro, or nuclear strictly reduces predicted emissions."""),
 
+    md("""### Visual Analysis: Figure Q1.2 - Feature Importance & Information Gain Decomposition
+#### Analytical Guide & Energy Driver Findings:
+- **Feature Importance Gain Distribution:** Disaggregates the information gain across national emission predictors.
+- **Key Finding:** Sovereign country context and population scale anchor baseline living standards, while energy mix shares dictate marginal changes. Among fuel predictors, fossil gas share (26.9% of energy gain), clean baseload share (16.3%), and oil share (8.1%) provide the highest information gain for predicting national decarbonization trajectories."""),
+
     code("""\
 # Display Question 1.2 Performance Metrics and Feature Importance
 with open(OUT_DIR / 'q1_2_metrics.json') as f:
@@ -329,10 +338,6 @@ if (OUT_DIR / 'q1_2_feature_importance.png').exists():
     ax.axis('off')
     plt.tight_layout()
     plt.show()"""),
-
-    md("""#### Figure Q1.2 Analytical Takeaways:
-- **Feature Importance Gain Distribution:** Disaggregates the information gain across national emission predictors.
-- **Key Finding:** Sovereign country context and population scale anchor baseline living standards, while energy mix shares dictate marginal changes. Among fuel predictors, fossil gas share (26.9% of energy gain), clean baseload share (16.3%), and oil share (8.1%) provide the highest information gain for predicting national decarbonization trajectories."""),
 
     # -------------------------------------------------------------------------
     # SECTION 4: QUESTION 2 EVENT SHOCK HYPOTHESIS
@@ -393,6 +398,11 @@ We cluster all 50 sovereign nations using **26-year trajectory dynamics** (2000 
 3. **Slow Transition / Coal Reliant (n=19):** India, Indonesia, Vietnam, Poland, South Africa. Rapid economic demand growth locked into fossil power infrastructure.
 4. **Fossil-Heavy High Emitters (n=4):** Qatar, UAE, Saudi Arabia, Kuwait. Petro-states with extreme per-capita emissions ($>17\\text{ t/capita}$) and $>88\\%$ fossil generation."""),
 
+    md("""### Visual Analysis: Figure Q3.1 - Sovereign Decarbonization Trajectory Velocity and Global Clusters
+#### Analytical Guide & Cluster Distribution Findings:
+- **World Choropleth Map & 2D Decarbonization Trajectory Velocity Scatter:** Maps all 50 sovereign nations by 26-year renewable growth (x-axis) vs. coal share change (y-axis), partitioned by the 4 K-Means empirical archetypes.
+- **Key Finding:** Nations clearly separate into distinct behavioral quadrants: Rapid Clean Energy Adopters dominate the upper-left quadrant (high renewable gains, aggressive coal retirement), Nuclear & Hydro Baseloaders occupy the center-left (structurally clean baseload), Slow Transition nations cluster near the origin, and Fossil-Heavy High Emitters occupy the far lower quadrant with extreme per-capita emissions."""),
+
     code("""\
 # Display Archetype Clustering Summary & World Maps
 clusters_df = pd.read_csv(OUT_DIR / 'q3_transition_clusters.csv')
@@ -416,10 +426,6 @@ axes[1].axis('off')
 plt.tight_layout()
 plt.show()"""),
 
-    md("""#### Figure Q3.1 Analytical Takeaways:
-- **World Choropleth Map & 2D Decarbonization Trajectory Velocity Scatter:** Maps all 50 sovereign nations by 26-year renewable growth (x-axis) vs. coal share change (y-axis), partitioned by the 4 K-Means empirical archetypes.
-- **Key Finding:** Nations clearly separate into distinct behavioral quadrants: Rapid Clean Energy Adopters dominate the upper-left quadrant (high renewable gains, aggressive coal retirement), Nuclear & Hydro Baseloaders occupy the center-left (structurally clean baseload), Slow Transition nations cluster near the origin, and Fossil-Heavy High Emitters occupy the far lower quadrant with extreme per-capita emissions."""),
-
     md("""---
 ### 5.2 Question 3.2: 2026-2030 Decarbonization Scenario Pathways
 We simulate national emissions across 50 countries x 3 pathways x 5 years = **750 projected points** using our monotone LightGBM engine:
@@ -437,6 +443,11 @@ We simulate national emissions across 50 countries x 3 pathways x 5 years = **75
 ### Physical Ordering Guarantee
 The IPCC base-year delta calibration guarantees that projected emissions preserve monotonic hierarchy without boundary discontinuity:
 $$\\text{Emissions}_{\\text{Accelerated}} \\le \\text{Emissions}_{\\text{Moderate}} \\le \\text{Emissions}_{\\text{BAU}} \\quad \\text{for all } 50 \\text{ nations and all years.}$$"""),
+
+    md("""### Visual Analysis: Figure Q3.2 - Global Carbon Fan Chart (2015-2030) and National Divergence
+#### Analytical Guide & Scenario Mitigation Findings:
+- **Global Carbon Fan Chart (2015-2030) & Top 15 Country Divergence Bar Chart:** Visualizes global emissions historical actuals splitting into the 3 transition pathways toward 2030, alongside nation-by-nation mitigation potential for the 15 largest global emitters.
+- **Key Finding:** The mitigation corridor between Business-As-Usual (35.11 Gt CO2 in 2030) and the Accelerated pathway (31.16 Gt CO2) creates an 11.03 Gigaton cumulative carbon dividend over 2027-2030. Country-level bar comparisons confirm that over 60% of total global divergence is concentrated in the top 5 emitter economies."""),
 
     code("""\
 # Display Scenario Projections Fan Chart & Top 15 Country Divergence
@@ -467,10 +478,6 @@ axes[1].axis('off')
 plt.tight_layout()
 plt.show()"""),
 
-    md("""#### Figure Q3.2 Analytical Takeaways:
-- **Global Carbon Fan Chart (2015-2030) & Top 15 Country Divergence Bar Chart:** Visualizes global emissions historical actuals splitting into the 3 transition pathways toward 2030, alongside nation-by-nation mitigation potential for the 15 largest global emitters.
-- **Key Finding:** The mitigation corridor between Business-As-Usual (35.11 Gt CO2 in 2030) and the Accelerated pathway (31.16 Gt CO2) creates an 11.03 Gigaton cumulative carbon dividend over 2027-2030. Country-level bar comparisons confirm that over 60% of total global divergence is concentrated in the top 5 emitter economies."""),
-
     md("""---
 ### 5.3 Question 3.3: Strategic Policy Insights & EU CBAM Tariff Risk
 1. **The 11.03 Gigaton Mitigation Dividend:** Under the Accelerated pathway, cumulative avoided global emissions between 2027 and 2030 reach **11.03 Gt CO2** relative to Business-As-Usual.
@@ -479,6 +486,11 @@ plt.show()"""),
 4. **EU CBAM Border Carbon Tariff Exposure Index:**
    We compute sovereign export exposure to the European Union's Carbon Border Adjustment Mechanism (CBAM) using a standardized 0-100 risk score:
    $$\\text{CBAM Risk} = 0.40 \\times S_{\\text{Fossil}} + 0.35 \\times S_{\\text{CO2/Capita}} + 0.25 \\times (1 - S_{\\Delta \\text{Renewables}})$$"""),
+
+    md("""### Visual Analysis: Figure Q3.3 - EU CBAM Border Carbon Tariff Exposure Rankings
+#### Analytical Guide & Strategic Trade Findings:
+- **EU CBAM Border Carbon Tariff Vulnerability Rankings:** Evaluates sovereign export exposure to the European Union Carbon Border Adjustment Mechanism using our composite 0-100 vulnerability score.
+- **Key Finding:** Petro-states and fossil-reliant exporters (Qatar: 87.2, Kuwait: 86.1, UAE: 84.7, Saudi Arabia: 82.5, Kazakhstan: 76.8) face the highest border tariff liabilities due to extreme grid carbon intensity and low renewable transition velocity. Nations scoring >70 face material trade friction and border tax penalties on industrial exports into regulated markets."""),
 
     code("""\
 # Display Top 10 EU CBAM Vulnerable Nations & Exposure Chart
@@ -500,10 +512,6 @@ if (FIG_DIR / 'fig_q3_3_cbam_tariff_exposure.png').exists():
     ax.axis('off')
     plt.tight_layout()
     plt.show()"""),
-
-    md("""#### Figure Q3.3 Analytical Takeaways:
-- **EU CBAM Border Carbon Tariff Vulnerability Rankings:** Evaluates sovereign export exposure to the European Union Carbon Border Adjustment Mechanism using our composite 0-100 vulnerability score.
-- **Key Finding:** Petro-states and fossil-reliant exporters (Qatar: 87.2, Kuwait: 86.1, UAE: 84.7, Saudi Arabia: 82.5, Kazakhstan: 76.8) face the highest border tariff liabilities due to extreme grid carbon intensity and low renewable transition velocity. Nations scoring >70 face material trade friction and border tax penalties on industrial exports into regulated markets."""),
 
     # -------------------------------------------------------------------------
     # SECTION 6: QUESTION 4 COMMERCIAL MVP
