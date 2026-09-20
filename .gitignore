@@ -10,5 +10,6 @@ __pycache__/
 .pytest_cache/
 .ipynb_checkpoints/
 .env
-venv/
+.venv/
 env/
+Q1.1_CARBON_PRICE_PLAN.md
