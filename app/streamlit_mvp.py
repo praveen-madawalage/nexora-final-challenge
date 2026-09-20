@@ -21,7 +21,6 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 st.set_page_config(
     page_title="Nexora CarbonPulse | Climate & Carbon Intelligence",
-    page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -117,10 +116,10 @@ with st.sidebar:
     nav = st.radio(
         "Navigation",
         [
-            "⚡ Score B: Market Carbon Shock Alert",
-            "🌱 Score A: Country Energy Transition",
-            "🎯 Interactive 2030 Simulator",
-            "🛡️ EU CBAM Tariff Risk Matrix",
+            "Score B: Market Carbon Shock Alert",
+            "Score A: Country Energy Transition",
+            "Interactive 2030 Simulator",
+            "EU CBAM Tariff Risk Matrix",
         ],
         index=0,
     )
@@ -135,8 +134,8 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 # 4. TAB 1: SCORE B — MARKET CARBON SHOCK ALERT
 # -----------------------------------------------------------------------------
-if nav == "⚡ Score B: Market Carbon Shock Alert":
-    st.title("⚡ Carbon Market Shock Alert Score (Score B)")
+if nav == "Score B: Market Carbon Shock Alert":
+    st.title("Carbon Market Shock Alert Score (Score B)")
     st.markdown(
         "*Real-time market stability index combining allowance price upward momentum, "
         "trailing 30-day volatility, and backward-looking climate/policy event severity.*"
@@ -177,13 +176,13 @@ if nav == "⚡ Score B: Market Carbon Shock Alert":
 
     # Status classification
     if score_b >= 80.0:
-        alert_badge = '<span class="badge-red">🚨 RED SHOCK WARNING</span>'
+        alert_badge = '<span class="badge-red">RED SHOCK WARNING</span>'
         alert_desc = "Extreme market stress: major trailing policy/disaster shock detected."
     elif score_b >= 65.0:
-        alert_badge = '<span class="badge-amber">⚠️ AMBER ALERT</span>'
+        alert_badge = '<span class="badge-amber">AMBER ALERT</span>'
         alert_desc = "Elevated volatility: heightened price sensitivity and regulatory shifts."
     else:
-        alert_badge = '<span class="badge-green">✅ NORMAL TRADING</span>'
+        alert_badge = '<span class="badge-green">NORMAL TRADING</span>'
         alert_desc = "Stable market regime: normal liquidity and low trailing event pressure."
 
     # Top KPI cards
@@ -290,8 +289,8 @@ if nav == "⚡ Score B: Market Carbon Shock Alert":
 # -----------------------------------------------------------------------------
 # 5. TAB 2: SCORE A — COUNTRY ENERGY TRANSITION
 # -----------------------------------------------------------------------------
-elif nav == "🌱 Score A: Country Energy Transition":
-    st.title("🌱 Country Energy Transition Score (Score A)")
+elif nav == "Score A: Country Energy Transition":
+    st.title("Country Energy Transition Score (Score A)")
     st.markdown(
         "*Evaluates national structural decarbonization velocity, clean baseload lock-in, "
         "and exposure to incoming carbon border taxes (EU CBAM).* "
@@ -321,13 +320,13 @@ elif nav == "🌱 Score A: Country Energy Transition":
 
     # Classification
     if score_a >= 75.0:
-        a_badge = '<span class="badge-green">🏆 TRANSITION LEADER</span>'
+        a_badge = '<span class="badge-green">TRANSITION LEADER</span>'
         a_desc = "Low border tax liability: rapid renewables velocity and established decarbonization."
     elif score_a < 40.0:
-        a_badge = '<span class="badge-red">⚠️ HIGH CARBON RISK</span>'
+        a_badge = '<span class="badge-red">HIGH CARBON RISK</span>'
         a_desc = "Severe EU CBAM tariff exposure: high fossil reliance and slow decarbonization velocity."
     else:
-        a_badge = '<span class="badge-amber">⚖️ MODERATE TRANSITIONER</span>'
+        a_badge = '<span class="badge-amber">MODERATE TRANSITIONER</span>'
         a_desc = "Moderate vulnerability: transitional fuel mix with ongoing gas/renewables buildout."
 
     # Top KPI cards
@@ -383,8 +382,8 @@ elif nav == "🌱 Score A: Country Energy Transition":
 # -----------------------------------------------------------------------------
 # 6. TAB 3: INTERACTIVE 2030 SCENARIO SIMULATOR
 # -----------------------------------------------------------------------------
-elif nav == "🎯 Interactive 2030 Simulator":
-    st.title("🎯 Dynamic 2026–2030 Emissions Simulator")
+elif nav == "Interactive 2030 Simulator":
+    st.title("Dynamic 2026-2030 Emissions Simulator")
     st.markdown(
         "*Adjust annual clean energy adoption and fossil phase-out policies to simulate "
         "real-time national emissions pathways through 2030 using our physics-constrained LightGBM surrogate.*"
@@ -395,9 +394,9 @@ elif nav == "🎯 Interactive 2030 Simulator":
         sim_country = st.selectbox("Select Country to Simulate", sorted(country_df["country"].unique()), index=sorted(country_df["country"].unique()).index("India"))
     with col_pop:
         c_base = country_df[(country_df["country"] == sim_country) & (country_df["year"] == 2026)].iloc[0]
-        st.info(f"📍 **{sim_country} (2026 Ground Truth):** {c_base['renewables_total_pct']:.1f}% Renewables, {c_base['coal_pct']:.1f}% Coal, {c_base['co2_per_capita_t']:.2f} t/capita")
+        st.info(f"**{sim_country} (2026 Ground Truth):** {c_base['renewables_total_pct']:.1f}% Renewables, {c_base['coal_pct']:.1f}% Coal, {c_base['co2_per_capita_t']:.2f} t/capita")
 
-    st.markdown("### 🎛️ Policy Lever Sliders")
+    st.markdown("### Policy Lever Sliders")
     sl1, sl2, sl3 = st.columns(3)
     with sl1:
         annual_ren_growth = st.slider("Renewables Growth (pp/year)", 0.0, 8.0, 3.0, 0.5)
@@ -526,8 +525,8 @@ elif nav == "🎯 Interactive 2030 Simulator":
 # -----------------------------------------------------------------------------
 # 7. TAB 4: EU CBAM TARIFF RISK MATRIX
 # -----------------------------------------------------------------------------
-elif nav == "🛡️ EU CBAM Tariff Risk Matrix":
-    st.title("🛡️ EU CBAM Tariff Risk Matrix & Global Archetypes")
+elif nav == "EU CBAM Tariff Risk Matrix":
+    st.title("EU CBAM Tariff Risk Matrix & Global Archetypes")
     st.markdown(
         "*Evaluates supply chain border tariff exposure under the EU Carbon Border Adjustment Mechanism (CBAM). "
         "Countries with heavy fossil dependency and high carbon intensity face compounding penalties on industrial exports.*"
@@ -552,7 +551,7 @@ elif nav == "🛡️ EU CBAM Tariff Risk Matrix":
     fig_choro.update_layout(template="plotly_dark", height=480, margin=dict(l=10, r=10, t=50, b=10))
     st.plotly_chart(fig_choro, use_container_width=True)
 
-    st.markdown("### 📊 Top Vulnerable Exporter Rankings")
+    st.markdown("### Top Vulnerable Exporter Rankings")
     cbam_sorted = cbam_df.sort_values("cbam_risk_score", ascending=False).reset_index(drop=True)
     st.dataframe(
         cbam_sorted[[
@@ -574,7 +573,7 @@ elif nav == "🛡️ EU CBAM Tariff Risk Matrix":
     # Download CSV
     csv_bytes = cbam_sorted.to_csv(index=False).encode('utf-8')
     st.download_button(
-        "📥 Download Full CBAM Exposure Ranking (CSV)",
+        "Download Full CBAM Exposure Ranking (CSV)",
         data=csv_bytes,
         file_name="nexora_cbam_exposure_ranking.csv",
         mime="text/csv",
