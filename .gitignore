@@ -1,8 +1,14 @@
 # Datasets
 data/raw/
 data/processed/
+raw/
 
 # Local and generated files
 .DS_Store
 __pycache__/
+*.py[cod]
+.pytest_cache/
 .ipynb_checkpoints/
+.env
+venv/
+env/
