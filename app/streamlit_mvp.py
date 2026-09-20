@@ -1,4 +1,4 @@
-﻿"""
+"""
 Nexora CarbonPulse - Climate Risk, Carbon Volatility & CBAM Intelligence Suite
 CodeFest Datathon Finals 2026 | Question 4 Interactive Prototype MVP
 
@@ -256,7 +256,7 @@ if nav == "1. Executive Overview":
                 "30d Volatility": f"{vol_30d:.2f}",
                 "Latest Date": m_sub["date"].iloc[-1].strftime("%Y-%m-%d")
             })
-        st.dataframe(pd.DataFrame(m_summary), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(m_summary), width='stretch', hide_index=True)
 
     with col_m2:
         st.markdown('<div class="section-header">Two Standardized Product Decision Scores</div>', unsafe_allow_html=True)
@@ -389,7 +389,7 @@ elif nav == "2. Market Shock & 30-Day Forecaster (Score B)":
                 xaxis_title="Trading Date", yaxis_title=f"Price ({currency})",
                 template="plotly_dark", height=420, margin=dict(l=20, r=20, t=50, b=20)
             )
-            st.plotly_chart(fig_fc, use_container_width=True)
+            st.plotly_chart(fig_fc, width='stretch')
 
     # Event Study & Ablation Table (Question 2 Integration)
     col_ab1, col_ab2 = st.columns(2)
@@ -416,7 +416,7 @@ elif nav == "2. Market Shock & 30-Day Forecaster (Score B)":
             xaxis_title="Trading Days Relative to Shock", yaxis_title="Cumulative Abnormal Return (%)",
             template="plotly_dark", height=320, margin=dict(l=20, r=20, t=40, b=20)
         )
-        st.plotly_chart(fig_car, use_container_width=True)
+        st.plotly_chart(fig_car, width='stretch')
 
     with col_ab2:
         st.markdown('<div class="section-header">Controlled Event Ablation Results</div>', unsafe_allow_html=True)
@@ -424,7 +424,7 @@ elif nav == "2. Market Shock & 30-Day Forecaster (Score B)":
             st.dataframe(ablation_df[[
                 "market", "baseline_mape_pct", "event_mape_pct", "delta_mape_pct",
                 "baseline_dir_acc_pct", "event_dir_acc_pct", "delta_dir_acc_pct"
-            ]], use_container_width=True, hide_index=True)
+            ]], width='stretch', hide_index=True)
             st.caption("Event features improve turning-point directional accuracy in California (+3.3%) and UK (+3.3%).")
 
 # -----------------------------------------------------------------------------
@@ -520,7 +520,7 @@ elif nav == "3. Country Energy Transition Screener (Score A)":
         color_discrete_sequence=["#1f2937", "#6b7280", "#f59e0b", "#3b82f6", "#06b6d4", "#eab308", "#10b981", "#84cc16"]
     )
     fig_mix.update_layout(template="plotly_dark", height=420, margin=dict(l=20, r=20, t=50, b=20))
-    st.plotly_chart(fig_mix, use_container_width=True)
+    st.plotly_chart(fig_mix, width='stretch')
 
 # -----------------------------------------------------------------------------
 # MODULE 4: DYNAMIC 2026-2030 POLICY SIMULATOR
@@ -624,7 +624,7 @@ elif nav == "4. Dynamic 2026-2030 Policy Simulator":
         }
     )
     fig_sim.update_layout(template="plotly_dark", height=420, margin=dict(l=20, r=20, t=50, b=20))
-    st.plotly_chart(fig_sim, use_container_width=True)
+    st.plotly_chart(fig_sim, width='stretch')
 
     # Metrics Summary
     co2_2026 = user_df[user_df["Year"] == 2026]["Predicted CO2/Capita"].iloc[0]
@@ -652,7 +652,7 @@ elif nav == "5. EU CBAM Border Tariff Risk Matrix":
             st.markdown('<div class="section-header">Top 15 Most Vulnerable Exporting Sovereigns</div>', unsafe_allow_html=True)
             st.dataframe(
                 cbam_df.head(15)[["country", "region", "fossil_share_2026", "co2_per_capita_2026", "cbam_risk_score", "cbam_tier"]],
-                use_container_width=True, hide_index=True
+                width='stretch', hide_index=True
             )
         with col_t2:
             st.markdown('<div class="section-header">Interactive CBAM Import Tariff Calculator</div>', unsafe_allow_html=True)
