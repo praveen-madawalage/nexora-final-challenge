@@ -2,6 +2,7 @@
 data/raw/
 data/processed/
 raw/
+data/outputs
 
 # Local and generated files
 .DS_Store
@@ -11,5 +12,14 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 venv/
+.venv/
+env/
 kickoff_prompts.md
 presentation/
+Q1.1_CARBON_PRICE_PLAN.md
+Q1.1_ADVANCED_MODEL_REPORT.md
+patch_notebook.py
+.vscode/
+pyrightconfig.json
+fix_notebook.py
+fix_notebook2.py
