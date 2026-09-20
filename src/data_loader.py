@@ -247,6 +247,33 @@ def run_canonical_qa(out_dir: Path):
     print("=" * 78)
 
 
+def audit_and_clean_all(base_dir=None):
+    """Compatibility bridge for team notebooks and automated test suites."""
+    if base_dir is None:
+        base_dir = get_base_dir()
+    elif isinstance(base_dir, str):
+        base_dir = Path(base_dir)
+    raw_dir = base_dir / "raw"
+    out_dir = base_dir / "data" / "processed"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    
+    c_df = clean_energy_and_co2(raw_dir, out_dir)
+    p_df = clean_carbon_prices(raw_dir, out_dir)
+    e_df = clean_climate_events(raw_dir, out_dir)
+    t_df = clean_temperature_anomaly(raw_dir, out_dir)
+    run_canonical_qa(out_dir)
+
+    clean_tables = {
+        'country_clean': c_df,
+        'prices_clean': p_df,
+        'events_clean': e_df,
+        'temp_clean': t_df
+    }
+    audit_path = base_dir / "data" / "outputs" / "data_quality_audit.csv"
+    audit_df = pd.read_csv(audit_path) if audit_path.exists() else pd.DataFrame()
+    return audit_df, clean_tables
+
+
 def main():
     base_dir = get_base_dir()
     raw_dir = base_dir / "raw"
