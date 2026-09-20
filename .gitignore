@@ -2,6 +2,7 @@
 data/raw/
 data/processed/
 raw/
+data/outputs
 
 # Local and generated files
 .DS_Store
@@ -13,6 +14,9 @@ __pycache__/
 .venv/
 env/
 Q1.1_CARBON_PRICE_PLAN.md
-
+Q1.1_ADVANCED_MODEL_REPORT.md
+patch_notebook.py
 .vscode/
 pyrightconfig.json
+fix_notebook.py
+fix_notebook2.py
