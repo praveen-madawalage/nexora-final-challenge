@@ -651,7 +651,7 @@ elif nav == "5. EU CBAM Border Tariff Risk Matrix":
         with col_t1:
             st.markdown('<div class="section-header">Top 15 Most Vulnerable Exporting Sovereigns</div>', unsafe_allow_html=True)
             st.dataframe(
-                cbam_df.head(15)[["country", "region", "fossil_ratio", "co2_per_capita_t", "cbam_risk_score"]],
+                cbam_df.head(15)[["country", "region", "fossil_share_2026", "co2_per_capita_2026", "cbam_risk_score", "cbam_tier"]],
                 use_container_width=True, hide_index=True
             )
         with col_t2:
@@ -662,7 +662,7 @@ elif nav == "5. EU CBAM Border Tariff Risk Matrix":
 
             supp_data = cbam_df[cbam_df["country"] == selected_supplier].iloc[0]
             # Tariff Formula: Volume * Direct Emissions Factor * Allowance Price
-            intensity_factor = min(2.5, max(0.4, supp_data["co2_per_capita_t"] / 5.0))
+            intensity_factor = min(2.5, max(0.4, supp_data["co2_per_capita_2026"] / 5.0))
             est_tariff_liability = import_vol * intensity_factor * carbon_price
 
             st.markdown(f"""
