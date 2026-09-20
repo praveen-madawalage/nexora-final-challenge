@@ -1,0 +1,7 @@
+dataset_name,raw_rows,raw_cols,primary_key,missing_cells,anomalies_detected,action_taken,clean_rows,status
+co2_emissions_yearly.csv,1350,8,"(iso3, year)",0,None (all emissions and population values positive),Standardized snake_case column names,1350,PASS
+energy_mix_yearly.csv,1350,14,"(iso3, year)",0,Fuel shares sum verified: 99.98% to 100.02%,Validated 100% fuel share closure; standardized names,1350,PASS
+country_clean.csv (MERGED),"1,350 x 1,350",8 + 14,"(iso3, year)",0,Zero key mismatch; exactly 50 countries x 27 years,"Inner join on (iso3, year); engineered clean_baseload & fossil_ratio",1350,PASS
+carbon_prices_daily.csv,15866,5,"(market, date)",0,"Negative prices: 0, Duplicates: 0",Parsed dates; added cyclical calendar & zero-leakage shifted lags,15866,PASS
+climate_events.csv,50,11,event_id,0,"Severity scores bounded [6, 10]; 0 duplicates",Standardized date formats; validated binary policy/disaster flags,50,PASS
+temperature_anomaly_monthly.csv,2528,7,"(region, year_month)","2,212 in co2_ppm (2212 non-global)",Scientific expected behavior: NASA GISS logs CO2 globally only,Documented global CO2 scope; retained anomaly degrees Celsius,2528,PASS
