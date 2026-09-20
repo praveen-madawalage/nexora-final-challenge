@@ -192,9 +192,9 @@ Auditing regional temperature anomalies and explaining the 2,212 missing values 
 print('=== Temperature Anomaly Regional Breakdown ===')
 temp_summary = temp.groupby('region').agg(
     months=('year_month', 'count'),
-    min_anomaly=('temp_anomaly_deg_c', 'min'),
-    mean_anomaly=('temp_anomaly_deg_c', 'mean'),
-    max_anomaly=('temp_anomaly_deg_c', 'max'),
+    min_anomaly=('temp_anomaly_c', 'min'),
+    mean_anomaly=('temp_anomaly_c', 'mean'),
+    max_anomaly=('temp_anomaly_c', 'max'),
     valid_co2_ppm=('co2_ppm', 'count')
 ).reset_index()
 display(temp_summary)
@@ -994,6 +994,39 @@ display(sc_summary)
     save_notebook(cells, "TeamName_FinalNotebook.ipynb")
 
 
+def execute_all_notebooks():
+    import nbformat
+    from nbconvert.preprocessors import ExecutePreprocessor
+    
+    order = [
+        "01_data_understanding_eda.ipynb",
+        "02_data_cleaning_and_preprocessing.ipynb",
+        "03_question1_predictive_modeling.ipynb",
+        "04_question2_event_hypothesis.ipynb",
+        "05_question3_scenario_modeling.ipynb",
+        "TeamName_FinalNotebook.ipynb"
+    ]
+    
+    print("\n" + "=" * 70)
+    print("EXECUTING ALL NOTEBOOKS SEQUENTIALLY TO EMBED OUTPUTS & PLOTS")
+    print("=" * 70)
+    
+    for fname in order:
+        nb_path = NOTEBOOKS_DIR / fname
+        print(f"--> Executing {fname}...")
+        ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
+        with open(nb_path, encoding="utf-8") as f:
+            nb = nbformat.read(f, as_version=4)
+        ep.preprocess(nb, {"metadata": {"path": str(NOTEBOOKS_DIR)}})
+        with open(nb_path, "w", encoding="utf-8") as f:
+            nbformat.write(nb, f)
+        print(f"[OK] {fname} successfully executed and saved with outputs.")
+    
+    print("=" * 70)
+    print("ALL NOTEBOOKS SUCCESSFULLY EXECUTED AND OUTPUTS EMBEDDED!")
+    print("=" * 70)
+
+
 if __name__ == "__main__":
     print("Generating complete notebook pipeline...")
     build_nb_01()
@@ -1002,4 +1035,6 @@ if __name__ == "__main__":
     build_nb_04()
     build_nb_05()
     build_master_nb()
-    print("All notebooks successfully generated!")
+    print("All notebook templates successfully generated!")
+    execute_all_notebooks()
+
