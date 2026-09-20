@@ -13,3 +13,6 @@ __pycache__/
 .venv/
 env/
 Q1.1_CARBON_PRICE_PLAN.md
+
+.vscode/
+pyrightconfig.json
