@@ -1,0 +1,33 @@
+{
+  "ridge_val": {
+    "r2": 0.9394172009352401,
+    "rmse": 1.6775708350686838,
+    "mae": 1.2859374272120636,
+    "mape": 30.67494253047724
+  },
+  "lgbm_val": {
+    "r2": 0.9670448814499779,
+    "rmse": 1.237278991731442,
+    "mae": 0.9366987367338311,
+    "mape": 16.99810006490257
+  },
+  "group_kfold_unseen_countries": {
+    "r2": -0.0816804706991147,
+    "rmse": 5.351758438929039,
+    "mae": 3.7955430950045086,
+    "mape": 78.42525057752749
+  },
+  "sanity_checks": {
+    "n_countries": 50,
+    "no_nans_in_predictions": true,
+    "no_negative_predictions": true,
+    "lgbm_delta_coal_to_gas": 0.167,
+    "lgbm_delta_coal_to_solar": -0.101,
+    "lgbm_delta_coal_to_wind": -0.134,
+    "ridge_delta_coal_to_gas": -0.949,
+    "ridge_delta_coal_to_solar": -1.346,
+    "ridge_delta_coal_to_wind": -2.947,
+    "ridge_scenarios_physically_ordered": true
+  },
+  "best_iteration": 929
+}
