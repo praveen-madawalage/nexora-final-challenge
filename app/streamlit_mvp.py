@@ -372,22 +372,37 @@ elif nav == "2. Market Shock & 30-Day Forecaster (Score B)":
                 mode="lines", name="Historical Pre-Test",
                 line=dict(color="#94a3b8", width=2)
             ))
-            # Actual prices in test window
+            # Actual prices in test window (deduplicated - same across all models)
+            first_model = fc_sub["model_name"].iloc[0]
+            actuals_sub = fc_sub[fc_sub["model_name"] == first_model].sort_values("date")
             fig_fc.add_trace(go.Scatter(
-                x=fc_sub["date"], y=fc_sub["actual_price"],
+                x=actuals_sub["date"], y=actuals_sub["actual_price"],
                 mode="lines+markers", name="Actual Ground Truth",
                 line=dict(color="#10b981", width=2.5)
             ))
-            # Model Predicted price
-            fig_fc.add_trace(go.Scatter(
-                x=fc_sub["date"], y=fc_sub["predicted_price"],
-                mode="lines+markers", name="Autoregressive Model Forecast",
-                line=dict(color="#3b82f6", width=2, dash="dash")
-            ))
+            # Plot each model's forecast as a separate trace
+            model_colors = {
+                "Ensemble (LGBM+Naive)": "#3b82f6",
+                "Direct LightGBM": "#8b5cf6",
+                "Autoregressive LightGBM": "#06b6d4",
+                "ARIMA": "#f59e0b",
+                "Exponential Smoothing": "#ec4899",
+                "Naive Persistence": "#6b7280",
+            }
+            for model_name in fc_sub["model_name"].unique():
+                model_data = fc_sub[fc_sub["model_name"] == model_name].sort_values("date")
+                color = model_colors.get(model_name, "#ffffff")
+                fig_fc.add_trace(go.Scatter(
+                    x=model_data["date"], y=model_data["predicted_price"],
+                    mode="lines+markers", name=model_name,
+                    line=dict(color=color, width=2, dash="dash"),
+                    marker=dict(size=4)
+                ))
             fig_fc.update_layout(
                 title=f"{selected_market} 30-Day Forward Pricing Horizon",
                 xaxis_title="Trading Date", yaxis_title=f"Price ({currency})",
-                template="plotly_dark", height=420, margin=dict(l=20, r=20, t=50, b=20)
+                template="plotly_dark", height=480, margin=dict(l=20, r=20, t=50, b=20),
+                legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5)
             )
             st.plotly_chart(fig_fc, width='stretch')
 
